@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<title>Groceries!</title>
+	</head>
+
+	<body>
+		<% if (message) { %>
+			<p><%- message %></p>
+		<% } %>
+
+		<h1>Groceries</h1>
+		<table>
+			<% for (let i = 0; i < items.length; i++) { %>
+				<tr>
+					<td><%= items[i].name %></td>
+				</tr>
+			<% } %>
+		</table>
+
+		<form method="post">
+			<input type="text" name="item" placeholder="Item name"/>
+			<button>Add</button>
+		</form>
+	</body>
+</html>

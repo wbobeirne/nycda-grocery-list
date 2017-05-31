@@ -2,7 +2,7 @@ require("dotenv").config();
 const exp = require("express");
 const bodyParser = require("body-parser");
 const app = exp();
-const query = require("./util/query");
+const Groceries = require("./util/groceries");
 
 // Setup the public assets to live in the assets folder
 app.use(exp.static("assets"));
@@ -18,10 +18,22 @@ app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 
 
+function renderGroceries(res, message) {
+	Groceries.getAll().then(function(items) {
+		res.render("list", {
+			items: items,
+			message: message,
+		});
+	});
+}
+
 app.get("/", function(req, res) {
-	// res.send("Hello!");
-	query("SELECT * FROM list").then(function(result) {
-		res.json(result);
+	renderGroceries(res);
+});
+
+app.post("/", function(req, res) {
+	Groceries.add(req.body.item).then(function() {
+		renderGroceries(res, "Saved " + req.body.item);
 	});
 });
 
