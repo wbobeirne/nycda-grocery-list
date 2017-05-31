@@ -8,6 +8,11 @@
 			<p><%- message %></p>
 		<% } %>
 
+		<form action="/search" method="get">
+			<input type="text" name="search" placeholder="Search for items"/>
+			<button>Search</button>
+		</form>
+
 		<h1>Groceries</h1>
 		<table>
 			<% for (let i = 0; i < items.length; i++) { %>
@@ -17,7 +22,7 @@
 			<% } %>
 		</table>
 
-		<form method="post">
+		<form action="/" method="post">
 			<input type="text" name="item" placeholder="Item name"/>
 			<button>Add</button>
 		</form>

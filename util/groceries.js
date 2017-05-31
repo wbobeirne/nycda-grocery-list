@@ -10,6 +10,13 @@ const Groceries = {
 	add: function(item) {
 		return query("INSERT INTO list (name) VALUES ($1)", [item]);
 	},
+
+	search: function(search) {
+		return query("SELECT * FROM list WHERE name LIKE $1", ["%" + search + "%"])
+			.then(function(res) {
+				return res.rows;
+			});
+	},
 };
 
 module.exports = Groceries;

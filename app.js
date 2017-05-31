@@ -37,6 +37,15 @@ app.post("/", function(req, res) {
 	});
 });
 
+app.get("/search", function(req, res) {
+	Groceries.search(req.query.search).then(function(items) {
+		res.render("list", {
+			items: items,
+			message: null,
+		});
+	});
+});
+
 
 const port = process.env.PORT || 3000;
 
