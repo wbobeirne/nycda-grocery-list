@@ -1,30 +1,44 @@
 <html>
 	<head>
 		<title>Groceries!</title>
+		<link rel="stylesheet" type="text/css" href="/css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="/css/style.css"/>
 	</head>
 
 	<body>
-		<% if (message) { %>
-			<p><%- message %></p>
-		<% } %>
-
-		<form action="/search" method="get">
-			<input type="text" name="search" placeholder="Search for items"/>
-			<button>Search</button>
-		</form>
-
-		<h1>Groceries</h1>
-		<table>
-			<% for (let i = 0; i < items.length; i++) { %>
-				<tr>
-					<td><%= items[i].name %></td>
-				</tr>
+		<div class="grocery">
+			<% if (message) { %>
+				<p class="grocery-message"><%- message %></p>
 			<% } %>
-		</table>
 
-		<form action="/" method="post">
-			<input type="text" name="item" placeholder="Item name"/>
-			<button>Add</button>
-		</form>
+			<h1 class="grocery-title">Grocery List</h1>
+
+			<form class="grocery-search" action="/search" method="get">
+				<input
+					type="text"
+					name="search"
+					placeholder="Search for items"
+					class="grocery-search-input"
+				/>
+				<button class="grocery-search-btn">Search</button>
+			</form>
+
+			<% if (typeof items !== undefined && items.length) { %>
+				<div class="grocery-list">
+					<% for (let i = 0; i < items.length; i++) { %>
+						<div class="grocery-list-item"><%= items[i].name %></div>
+					<% } %>
+				</div>
+			<% } else { %>
+				<p class="grocery-empty">
+					Add some items to your grocery list!
+				</p>
+			<% } %>
+
+			<form class="grocery-add" action="/" method="post">
+				<input class="grocery-add-input" type="text" name="item" placeholder="Item name"/>
+				<button class="grocery-add-btn">Add</button>
+			</form>
+		</div>
 	</body>
 </html>

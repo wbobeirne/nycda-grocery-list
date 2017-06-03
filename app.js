@@ -41,7 +41,7 @@ app.get("/search", function(req, res) {
 	Groceries.search(req.query.search).then(function(items) {
 		res.render("list", {
 			items: items,
-			message: null,
+			message: "Showing results for '" + req.query.search + "'",
 		});
 	});
 });
