@@ -49,7 +49,7 @@ app.get("/search", function(req, res) {
 
 
 sql.sync().then(function() {
-	console.log("")
+	console.log("Database synced");
 	const port = process.env.PORT || 3000;
 
 	app.listen(port, function() {
