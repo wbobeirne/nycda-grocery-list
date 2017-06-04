@@ -3,6 +3,7 @@ const exp = require("express");
 const bodyParser = require("body-parser");
 const app = exp();
 const Groceries = require("./util/groceries");
+const sql = require("./util/sql");
 
 // Setup the public assets to live in the assets folder
 app.use(exp.static("assets"));
@@ -47,8 +48,11 @@ app.get("/search", function(req, res) {
 });
 
 
-const port = process.env.PORT || 3000;
+sql.sync().then(function() {
+	console.log("")
+	const port = process.env.PORT || 3000;
 
-app.listen(port, function() {
-    console.log("Listening at http://localhost:" + port);
+	app.listen(port, function() {
+		console.log("Listening at http://localhost:" + port);
+	});
 });
